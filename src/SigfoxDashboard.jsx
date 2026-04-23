@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
 // ─── Utility ────────────────────────────────────────────────────────────────
-
 function fmt(v, decimals = 1) {
   return isNaN(v) ? "—" : Number(v).toFixed(decimals);
 }
@@ -48,10 +47,9 @@ const MOCK_DATA = [
   { temperature: 21.5, humidity: 55, lat: 55.6761, lon: 12.5683, alt: 12 },
 ];
 
-const MAX_HISTORY = 500; // store up to 500 readings in localStorage
+const MAX_HISTORY = 500;
 
 // ─── Storage ─────────────────────────────────────────────────────────────────
-
 const STORAGE_KEY = "sigfox_readings";
 
 function loadStoredHistory() {
@@ -65,7 +63,6 @@ function loadStoredHistory() {
 
 function saveHistory(history) {
   try {
-    // Keep only the last MAX_HISTORY entries on disk too
     const trimmed = history.slice(-MAX_HISTORY);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(trimmed));
   } catch (_) {}
@@ -96,7 +93,6 @@ function exportCSV(history) {
 }
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
-
 function MetricCard({ label, value, unit, status }) {
   const statusColors = {
     ok: { bg: "#e8f5e0", text: "#2d6a1a", label: "Normal" },
@@ -219,7 +215,6 @@ function MiniChart({ history }) {
 }
 
 // ─── Main component ──────────────────────────────────────────────────────────
-
 export default function SigfoxDashboard() {
   const [apiUrl, setApiUrl] = useState("");
   const [pollInterval, setPollInterval] = useState(30);
@@ -510,7 +505,7 @@ export default function SigfoxDashboard() {
           <div style={styles.controlsRow}>
             {/* API settings */}
             <div style={styles.card}>
-              <div style={styles.cardTitle} >API settings</div>
+              <div style={styles.cardTitle}>API settings</div>
               <div style={{ marginTop: 12 }}>
                 <div style={styles.fieldLabel}>Endpoint URL</div>
                 <input
@@ -583,7 +578,6 @@ export default function SigfoxDashboard() {
 }
 
 // ─── Styles ──────────────────────────────────────────────────────────────────
-
 const styles = {
   shell: {
     maxWidth: 860,
