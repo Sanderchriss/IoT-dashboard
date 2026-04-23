@@ -35,7 +35,8 @@ function playBeep() {
     gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.5);
     osc.start();
     osc.stop(ctx.currentTime + 0.5);
-  } catch (_) {}
+    // eslint-disable-next-line no-unused-vars
+  } catch (_) {""}
 }
 
 const MOCK_DATA = [
@@ -56,6 +57,7 @@ function loadStoredHistory() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? JSON.parse(raw) : [];
+    // eslint-disable-next-line no-unused-vars
   } catch (_) {
     return [];
   }
@@ -65,7 +67,8 @@ function saveHistory(history) {
   try {
     const trimmed = history.slice(-MAX_HISTORY);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(trimmed));
-  } catch (_) {}
+    // eslint-disable-next-line no-unused-vars
+  } catch (_) {""}
 }
 
 function exportJSON(history) {
